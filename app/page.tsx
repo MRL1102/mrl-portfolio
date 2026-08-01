@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import OrbitImages from "./components/OrbitImages";
 
 const slides = ["首页", "科研", "实习", "项目", "教育与优势", "生活", "联系"];
 const quotes = [
@@ -26,6 +27,7 @@ export default function Home() {
   const [active, setActive] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
   const [quoteIndex, setQuoteIndex] = useState(0);
+  const [lifePaused, setLifePaused] = useState(false);
   const locked = useRef(false);
   const touchStart = useRef(0);
   const quote = quotes[quoteIndex];
@@ -70,7 +72,7 @@ export default function Home() {
 
         <section className={`slide strength-slide ${active === 4 ? "is-active" : ""}`} aria-label="教育与个人优势"><div className="education-backdrop" /><div className="slide-inner strength-inner"><div className="education-head reveal r1"><p className="eyebrow">04 / EDUCATION & STRENGTHS</p><h2>把专业训练，<br />变成持续的<span>能力。</span></h2></div><div className="education-timeline reveal r2"><article><span>2024 — NOW</span><h3>兰州大学</h3><p>环境工程 · 硕士研究生</p></article><article><span>2020 — 2024</span><h3>中国矿业大学</h3><p>安全工程 · 本科<br />A+ 学科 / 全国第一</p></article></div><div className="strengths">{[["01", "研究到落地", "把抽象问题变成可验证、可执行的路径。"], ["02", "AI Native", "以 Prompt、模型评测和 Vibe Coding 重构工作流。"], ["03", "推动发生", "20+ 场校院活动统筹经验，在限制中推进结果。"]].map((item, index) => <article className={`reveal r${index + 3}`} key={item[0]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p><i>↗</i></article>)}</div></div></section>
 
-        <section className={`slide life-slide ${active === 5 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="slide-inner life-inner"><div className="life-title"><p className="eyebrow reveal r1">05 / OFF THE CLOCK</p><h2 className="reveal r2">球场、山野<br />与<span>正在发生。</span></h2><p className="reveal r3">研究之外，也在真实的现场里<br />保持好奇、热爱与行动。</p></div><div className="life-gallery">{[["/assets/life-basketball.jpg", "篮球现场", "TEAM / ENERGY"], ["/assets/life-award.jpg", "校运会获奖", "EFFORT / GROWTH"], ["/assets/life-mountain.jpg", "冰沟河徒步", "WALK / DISCOVER"]].map(([src, title, tag], index) => <article className={`life-photo reveal r${index + 2}`} key={title}><img src={src} alt={title} /><div><span>{tag}</span><h3>{title}</h3><i>↗</i></div></article>)}</div></div></section>
+        <section className={`slide life-slide ${active === 5 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="slide-inner life-inner"><p className="eyebrow life-kicker reveal r1">05 / OFF THE CLOCK</p><div className="life-orbit reveal r2" onMouseEnter={() => setLifePaused(true)} onMouseLeave={() => setLifePaused(false)}><OrbitImages images={["/assets/life-basketball.jpg", "/assets/life-award.jpg", "/assets/life-mountain.jpg", "/assets/life-basketball.jpg", "/assets/life-award.jpg", "/assets/life-mountain.jpg"]} radiusX={490} radiusY={180} rotation={-8} duration={34} itemSize={178} paused={lifePaused} className="life-orbit-images" centerContent={<div className="life-center"><h2>球场、山野<br />与<span>正在发生。</span></h2><p>研究之外，也在真实的现场里<br />保持好奇、热爱与行动。</p><b>{lifePaused ? "PAUSED / EXPLORE" : "ORBITING / MEMORIES"}</b></div>} /></div></div></section>
 
         <section className={`slide contact-slide ${active === 6 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="contact-spark" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com">mrl1102@163.com <i>↗</i></a><div className="contact-data reveal r4"><p>马瑞良 / MRL<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p><button onClick={() => goTo(0)}>回到首页 ↑</button></div></div></section>
       </div>
