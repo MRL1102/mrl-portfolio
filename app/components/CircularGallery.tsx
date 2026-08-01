@@ -22,7 +22,7 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
   useEffect(() => {
     const container = containerRef.current;
     if (!container || !items.length) return;
-    const renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio || 1, 2) });
+    const renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio || 1, 3) });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
     container.appendChild(gl.canvas);
@@ -41,12 +41,12 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
     let startX = 0;
     let startScroll = 0;
 
-    const vertex = `precision highp float; attribute vec3 position; attribute vec2 uv; uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix; uniform float uTime; uniform float uSpeed; varying vec2 vUv; void main(){vUv=uv;vec3 p=position;p.z=(sin(p.x*4.0+uTime)*1.5+cos(p.y*2.0+uTime)*1.5)*(.1+uSpeed*.5);gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);}`;
+    const vertex = `precision highp float; attribute vec3 position; attribute vec2 uv; uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix; varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`;
     const fragment = `precision highp float; uniform vec2 uImageSizes; uniform vec2 uPlaneSizes; uniform sampler2D tMap; uniform float uBorderRadius; varying vec2 vUv; float roundedBoxSDF(vec2 p,vec2 b,float r){vec2 d=abs(p)-b;return length(max(d,vec2(0.0)))+min(max(d.x,d.y),0.0)-r;} void main(){vec2 ratio=vec2(min((uPlaneSizes.x/uPlaneSizes.y)/(uImageSizes.x/uImageSizes.y),1.0),min((uPlaneSizes.y/uPlaneSizes.x)/(uImageSizes.y/uImageSizes.x),1.0));vec2 uv=vec2(vUv.x*ratio.x+(1.0-ratio.x)*.5,vUv.y*ratio.y+(1.0-ratio.y)*.5);vec4 color=texture2D(tMap,uv);float d=roundedBoxSDF(vUv-.5,vec2(.5-uBorderRadius),uBorderRadius);float alpha=1.0-smoothstep(-.002,.002,d);gl_FragColor=vec4(color.rgb,alpha);}`;
 
     const medias = repeatedItems.map((item, index) => {
       const texture = new Texture(gl, { generateMipmaps: true });
-      const program = new Program(gl, { depthTest: false, depthWrite: false, transparent: true, vertex, fragment, uniforms: { tMap: { value: texture }, uImageSizes: { value: [1, 1] }, uPlaneSizes: { value: [1, 1] }, uTime: { value: Math.random() * 100 }, uSpeed: { value: 0 }, uBorderRadius: { value: borderRadius } } });
+      const program = new Program(gl, { depthTest: false, depthWrite: false, transparent: true, vertex, fragment, uniforms: { tMap: { value: texture }, uImageSizes: { value: [1, 1] }, uPlaneSizes: { value: [1, 1] }, uBorderRadius: { value: borderRadius } } });
       const image = new Image();
       image.src = item.image;
       image.onload = () => { texture.image = image; program.uniforms.uImageSizes.value = [image.naturalWidth, image.naturalHeight]; };
@@ -73,7 +73,6 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
     const wrap = (value: number, size: number) => ((value + size / 2) % size + size) % size - size / 2;
     const render = () => {
       scroll.current += (scroll.target - scroll.current) * scrollEase;
-      const speed = scroll.target - scroll.current;
       medias.forEach((media) => {
         const x = wrap(media.index * cardWidth - scroll.current, totalWidth);
         media.plane.position.x = x;
@@ -86,8 +85,6 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
           media.plane.position.y = bend > 0 ? -arc : arc;
           media.plane.rotation.z = (bend > 0 ? -1 : 1) * Math.sign(x) * Math.asin(Math.min(effectiveX / radius, 1));
         }
-        media.program.uniforms.uTime.value += 0.04;
-        media.program.uniforms.uSpeed.value = Math.min(Math.abs(speed), 1);
       });
       renderer.render({ scene, camera });
       raf = window.requestAnimationFrame(render);
