@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import MagicBento from "./components/MagicBento";
 
 const slides = ["首页", "科研", "实习", "项目", "教育与优势", "生活", "联系"];
 const quotes = [
@@ -23,13 +24,25 @@ const projects = [
 ];
 
 const lifePhotos = [
-  "/assets/life-basketball.jpg",
-  "/assets/life-changsha.jpg",
-  "/assets/life-softball.jpg",
-  "/assets/life-award.jpg",
-  "/assets/life-wushaoling.jpg",
-  "/assets/life-binggouhe.jpg",
-  "/assets/life-gangshika.jpg",
+  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照", featured: true },
+  { image: "/assets/life-changsha.jpg", alt: "长沙生活照" },
+  { image: "/assets/life-softball.jpg", alt: "校运会垒球掷远生活照" },
+  { image: "/assets/life-award.jpg", alt: "校运会获奖生活照" },
+  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照" },
+  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河生活照" },
+  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照", featured: true },
+];
+
+const researchItems = [
+  { image: "/assets/research-pages/research-01.png", alt: "SCI论文首页", label: "SCI / FIRST AUTHOR", title: "Indoor pollutant dispersion pathways", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439", featured: true },
+  { image: "/assets/research-pages/research-02.png", alt: "发明专利受理通知书", label: "INVENTION PATENT", title: "大气化学反应计算替代模型" },
+  { image: "/assets/research-pages/research-09.png", alt: "发明专利授权证书", label: "AUTHORIZED PATENT", title: "大气化学反应计算替代模型" },
+  { image: "/assets/research-pages/research-03.png", alt: "软件著作权证书：分布式住宅室内空气质量感知网络云平台", label: "SOFTWARE COPYRIGHT 01", title: "分布式住宅室内空气质量感知网络云平台 V1.0" },
+  { image: "/assets/research-pages/research-04.png", alt: "软件著作权证书：建筑室内空气净化效能评估与优化平台", label: "SOFTWARE COPYRIGHT 02", title: "建筑室内空气净化效能评估与优化平台 V1.0" },
+  { image: "/assets/research-pages/research-05.png", alt: "软件著作权证书：室内环境质量智能监测与分析系统", label: "SOFTWARE COPYRIGHT 03", title: "室内环境质量智能监测与分析系统 V1.0" },
+  { image: "/assets/research-pages/research-06.png", alt: "软件著作权证书：室内空气污染物时空演化模拟与源头逆向解析系统", label: "SOFTWARE COPYRIGHT 04", title: "室内空气污染物时空演化模拟与源头逆向解析系统 V1.0" },
+  { image: "/assets/research-pages/research-07.png", alt: "软件著作权证书：室内空气污染源动态解析与扩散模拟分析系统", label: "SOFTWARE COPYRIGHT 05", title: "室内空气污染源动态解析与扩散模拟分析系统 V1.0" },
+  { image: "/assets/research-pages/research-08.png", alt: "软件著作权证书：室内人居环境暴露评估服务平台", label: "SOFTWARE COPYRIGHT 06", title: "室内人居环境暴露评估服务平台 V1.0" },
 ];
 
 export default function Home() {
@@ -68,11 +81,7 @@ export default function Home() {
           <div className="slide-inner hero-inner"><p className="quote-label reveal r1">A THOUGHT FOR TODAY / 2026</p><h1 className="quote-text reveal r2">{quote.text.split("\n").map((line) => <span key={line}>{line}</span>)}</h1><p className="quote-author reveal r3">— {quote.author}</p><button className="scroll-more reveal r4" onClick={() => move(1)}>下滑了解更多 <i>↓</i></button></div>
         </section>
 
-        <section className={`slide research-slide ${active === 1 ? "is-active" : ""}`} aria-label="科研成果"><div className="research-backdrop" /><div className="slide-inner research-inner"><div className="research-heading reveal r1"><p className="eyebrow">01 / RESEARCH OUTPUT</p><h2>研究不仅产出成果，<br />也留下<span>方法。</span></h2></div><div className="research-grid">
-          <a className="research-feature paper-feature reveal r2" href="https://www.sciencedirect.com/science/article/pii/S0360132325016439" target="_blank" rel="noreferrer"><img src="/assets/research-paper.jpg" alt="SCI 论文首页" /><div className="research-overlay"><span>SCI / FIRST AUTHOR / 2026</span><h3>Indoor pollutant<br />dispersion pathways</h3><p>提出可解释的 X-GAT-GRU 框架，利用真实居住环境传感器数据，动态解析室内 PM₂.₅ 扩散路径。</p><b>阅读论文 <i>↗</i></b></div></a>
-          <article className="research-feature patent-feature reveal r3"><img src="/assets/research-patent.png" alt="发明专利申请通知书" /><div className="research-overlay"><span>INVENTION PATENTS / 02</span><h3>发明专利</h3><div className="patent-status"><p><b>01</b><em>已授权</em><small>室内环境智能监测相关技术</small></p><p><b>02</b><em>申请中</em><small>低碳与环境数据分析相关技术</small></p></div><b>查看状态 <i>↗</i></b></div></article>
-          <article className="research-feature copyright-feature reveal r4"><img src="/assets/research-copyright.png" alt="计算机软件著作权登记证书" /><div className="research-overlay"><span>SOFTWARE COPYRIGHT / 06</span><h3>授权成果</h3><p>作为第二著作权人，参与《建筑室内空气净化效能评估与优化平台 V1.0》等 6 项软件著作权。</p><b>证书一览 <i>↗</i></b></div></article>
-        </div></div></section>
+        <section className={`slide research-slide ${active === 1 ? "is-active" : ""}`} aria-label="科研成果"><div className="research-backdrop" /><div className="slide-inner research-bento-inner"><div className="research-heading reveal r1"><p className="eyebrow">01 / RESEARCH OUTPUT</p><h2>科研成果，<br />逐张<span>展开。</span></h2></div><div className="research-bento-wrap reveal r2"><MagicBento items={researchItems} className="research-bento" scrollable /></div></div></section>
 
         <section className={`slide experience-slide ${active === 2 ? "is-active" : ""}`} aria-label="实习经历"><div className="workflow-backdrop" /><div className="slide-inner"><div className="experience-head"><div><p className="eyebrow reveal r1">02 / FIELD NOTES</p><h2 className="reveal r2">不只记录，<br />更进入<span>现场。</span></h2></div><p className="reveal r3">从产业现场到 AI 产品，<br />每一段实践都在校准我解决问题的方式。</p></div><div className="experience-grid">{internships.map((item, index) => <article className={`experience-card reveal r${index + 2}`} key={item[1]}><span>{item[0]}</span><div className="card-plus">+</div><h3>{item[1]}</h3><b>{item[2]}</b><p>{item[3]}</p></article>)}</div></div></section>
 
@@ -80,7 +89,7 @@ export default function Home() {
 
         <section className={`slide strength-slide ${active === 4 ? "is-active" : ""}`} aria-label="教育与个人优势"><div className="education-backdrop" /><div className="slide-inner strength-inner"><div className="education-head reveal r1"><p className="eyebrow">04 / EDUCATION & STRENGTHS</p><h2>把专业训练，<br />变成持续的<span>能力。</span></h2></div><div className="education-timeline reveal r2"><article><span>2024 — NOW</span><h3>兰州大学</h3><p>环境工程 · 硕士研究生</p></article><article><span>2020 — 2024</span><h3>中国矿业大学</h3><p>安全工程 · 本科<br />A+ 学科 / 全国第一</p></article></div><div className="strengths">{[["01", "研究到落地", "把抽象问题变成可验证、可执行的路径。"], ["02", "AI Native", "以 Prompt、模型评测和 Vibe Coding 重构工作流。"], ["03", "推动发生", "20+ 场校院活动统筹经验，在限制中推进结果。"]].map((item, index) => <article className={`reveal r${index + 3}`} key={item[0]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p><i>↗</i></article>)}</div></div></section>
 
-        <section className={`slide life-slide ${active === 5 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="life-gallery" tabIndex={0} onWheel={(event) => { event.preventDefault(); event.stopPropagation(); event.currentTarget.scrollLeft += event.deltaY; }} onTouchStart={(event) => event.stopPropagation()} onTouchEnd={(event) => event.stopPropagation()}>{lifePhotos.map((photo, index) => <figure key={photo}><img src={photo} alt={`生活照片 ${index + 1}`} loading="eager" decoding="sync" /></figure>)}</div></section>
+        <section className={`slide life-slide ${active === 5 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="life-bento-wrap"><MagicBento items={lifePhotos} className="life-bento" /></div></section>
 
         <section className={`slide contact-slide ${active === 6 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="contact-spark" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com">mrl1102@163.com <i>↗</i></a><div className="contact-data reveal r4"><p>马瑞良 / MRL<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p><button onClick={() => goTo(0)}>回到首页 ↑</button></div></div></section>
       </div>
