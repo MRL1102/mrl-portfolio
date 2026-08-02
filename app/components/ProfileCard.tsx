@@ -5,11 +5,9 @@ import "./ProfileCard.css";
 
 type ProfileCardProps = {
   avatarUrl: string;
-  name: string;
-  title: string;
 };
 
-export default function ProfileCard({ avatarUrl, name, title }: ProfileCardProps) {
+export default function ProfileCard({ avatarUrl }: ProfileCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const resetCard = () => {
@@ -35,16 +33,12 @@ export default function ProfileCard({ avatarUrl, name, title }: ProfileCardProps
     <div className="profile-card-wrap">
       <div className="profile-card-glow" aria-hidden="true" />
       <div ref={cardRef} className="profile-card" onPointerMove={moveCard} onPointerLeave={resetCard}>
-        <img className="profile-card-avatar" src={avatarUrl} alt={`${name}证件照`} />
+        <img className="profile-card-avatar" src={avatarUrl} alt="马瑞良证件照" />
         <div className="profile-card-foil" aria-hidden="true" />
         <div className="profile-card-grain" aria-hidden="true" />
         <div className="profile-card-top">
           <span>PERSONAL FILE</span>
           <b>2026</b>
-        </div>
-        <div className="profile-card-bottom">
-          <p>{name}</p>
-          <span>{title}</span>
         </div>
       </div>
     </div>

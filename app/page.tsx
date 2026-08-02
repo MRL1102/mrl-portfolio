@@ -74,16 +74,15 @@ export default function Home() {
             <div className="hero-profile-copy">
               <p className="hero-kicker reveal r1">MARUILIANG / PERSONAL PORTFOLIO</p>
               <h1 className="hero-name reveal r2">马瑞良</h1>
-              <p className="hero-role reveal r2">环境工程 · AI 产品 · 研究实践</p>
               <div className="hero-data reveal r3">
                 <article><span>电话</span><b>156 2042 0698</b></article>
                 <article><span>籍贯</span><b>天津市</b></article>
                 <article><span>邮箱</span><b>mrl1102@163.com</b></article>
-                <article><span>教育经历</span><b>兰州大学 · 环境工程硕士研究生<br />中国矿业大学 · 安全工程本科</b></article>
+                <article><span>教育经历</span><b className="education-value"><em>兰州大学</em><i>环境工程 · 硕士研究生</i><em>中国矿业大学</em><i>安全工程 · 本科</i></b></article>
               </div>
               <button className="scroll-more reveal r4" onClick={() => move(1)}>下滑了解更多 <i>↓</i></button>
             </div>
-            <div className="hero-profile-card reveal r3"><ProfileCard avatarUrl="/assets/profile-headshot.jpg" name="马瑞良" title="ENVIRONMENTAL ENGINEERING / AI" /></div>
+            <div className="hero-profile-card reveal r3"><ProfileCard avatarUrl="/assets/profile-headshot.jpg" /></div>
           </div>
         </section>
 

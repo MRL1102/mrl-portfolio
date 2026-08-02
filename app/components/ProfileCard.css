@@ -40,8 +40,5 @@
 .profile-card-top,.profile-card-bottom { position:absolute; z-index:4; right:22px; left:22px; display:flex; align-items:center; justify-content:space-between; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.5); }
 .profile-card-top { top:20px; font-size:10px; letter-spacing:.17em; }
 .profile-card-top b { color:var(--lime); font-size:12px; }
-.profile-card-bottom { bottom:21px; display:block; }
-.profile-card-bottom p { margin:0 0 4px; color:#fff; font-size:clamp(28px,2.4vw,42px); line-height:1; letter-spacing:.04em; }
-.profile-card-bottom span { color:var(--lime); font-size:10px; letter-spacing:.15em; }
 
 @media (max-width:720px) { .profile-card-wrap { width:min(62vw,330px); } }
