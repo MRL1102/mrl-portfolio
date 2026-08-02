@@ -3,15 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import CircularGallery from "./components/CircularGallery";
 import MagicBento from "./components/MagicBento";
+import ProfileCard from "./components/ProfileCard";
 
 const slides = ["首页", "科研", "实习", "项目", "教育与优势", "生活", "联系"];
-const quotes = [
-  { text: "教育不是注满一桶水，\n而是点燃一把火。", author: "W. B. 叶芝" },
-  { text: "最重要的问题，\n往往不是已经有答案的问题。", author: "阿尔伯特·爱因斯坦" },
-  { text: "真正的发现之旅，\n不在于寻找新的风景。", author: "马塞尔·普鲁斯特" },
-  { text: "世界上那些最容易的事情中，\n拖延时间最不费力。", author: "塞缪尔·约翰逊" },
-];
-
 const internships = [
   ["2026.01—03", "北京炫图未来科技", "AI 产品增长运营", "冷启动竞品、用户行为和运营数据分析"],
   ["2025.10—12", "南京元数信息技术", "模型测评", "大模型生成、视频理解与 Prompt 验证"],
@@ -49,15 +43,12 @@ const researchGalleryItems = [
 export default function Home() {
   const [active, setActive] = useState(0);
   const [selectedProject, setSelectedProject] = useState(0);
-  const [quoteIndex, setQuoteIndex] = useState(0);
   const locked = useRef(false);
   const touchStart = useRef(0);
-  const quote = quotes[quoteIndex];
 
   const goTo = useCallback((index: number) => setActive(Math.max(0, Math.min(slides.length - 1, index))), []);
   const move = useCallback((direction: number) => setActive((current) => Math.max(0, Math.min(slides.length - 1, current + direction))), []);
 
-  useEffect(() => { setQuoteIndex(Math.floor(Math.random() * quotes.length)); }, []);
   useEffect(() => {
     const release = () => { locked.current = false; };
     const onWheel = (event: WheelEvent) => { event.preventDefault(); if (locked.current || Math.abs(event.deltaY) < 12) return; locked.current = true; move(event.deltaY > 0 ? 1 : -1); window.setTimeout(release, 760); };
@@ -79,7 +70,21 @@ export default function Home() {
       <div className="deck" style={{ transform: `translate3d(0, -${active * 100}svh, 0)` }}>
         <section className={`slide hero-slide ${active === 0 ? "is-active" : ""}`} aria-label="首页">
           <div className="hero-backdrop" /><div className="hero-grain" />
-          <div className="slide-inner hero-inner"><p className="quote-label reveal r1">A THOUGHT FOR TODAY / 2026</p><h1 className="quote-text reveal r2">{quote.text.split("\n").map((line) => <span key={line}>{line}</span>)}</h1><p className="quote-author reveal r3">— {quote.author}</p><button className="scroll-more reveal r4" onClick={() => move(1)}>下滑了解更多 <i>↓</i></button></div>
+          <div className="slide-inner hero-inner">
+            <div className="hero-profile-copy">
+              <p className="hero-kicker reveal r1">MARUILIANG / PERSONAL PORTFOLIO</p>
+              <h1 className="hero-name reveal r2">马瑞良</h1>
+              <p className="hero-role reveal r2">环境工程 · AI 产品 · 研究实践</p>
+              <div className="hero-data reveal r3">
+                <article><span>电话</span><b>156 2042 0698</b></article>
+                <article><span>籍贯</span><b>天津市</b></article>
+                <article><span>邮箱</span><b>mrl1102@163.com</b></article>
+                <article><span>教育经历</span><b>兰州大学 · 环境工程硕士研究生<br />中国矿业大学 · 安全工程本科</b></article>
+              </div>
+              <button className="scroll-more reveal r4" onClick={() => move(1)}>下滑了解更多 <i>↓</i></button>
+            </div>
+            <div className="hero-profile-card reveal r3"><ProfileCard avatarUrl="/assets/profile-headshot.jpg" name="马瑞良" title="ENVIRONMENTAL ENGINEERING / AI" /></div>
+          </div>
         </section>
 
         <section className={`slide research-slide ${active === 1 ? "is-active" : ""}`} aria-label="科研成果"><div className="research-backdrop" /><div className="research-circular"><CircularGallery items={researchGalleryItems} bend={2.35} borderRadius={0.018} scrollSpeed={2.3} scrollEase={0.04} /></div></section>
