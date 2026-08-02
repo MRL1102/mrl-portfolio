@@ -126,7 +126,7 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
   return (
     <div ref={containerRef} className="circular-gallery" tabIndex={0} role="region" aria-label="科研成果画廊，可滚动或拖动浏览">
       {items.map((item, index) => {
-        const content = <img src={item.image} alt={item.text ?? `科研成果 ${index + 1}`} loading="eager" decoding="sync" draggable={false} onDragStart={preventImageDrag} />;
+        const content = <><img src={item.image} alt={item.text ?? `科研成果 ${index + 1}`} loading="eager" decoding="sync" draggable={false} onDragStart={preventImageDrag} />{item.href && item.text ? <span className="circular-gallery__link">{item.text}</span> : null}</>;
         const style = { "--gallery-order": index } as CSSProperties;
         return item.href ? <a className="circular-gallery__item" style={style} href={item.href} target="_blank" rel="noreferrer" key={item.image}>{content}</a> : <article className="circular-gallery__item" style={style} key={item.image}>{content}</article>;
       })}

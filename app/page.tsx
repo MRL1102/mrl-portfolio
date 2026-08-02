@@ -24,10 +24,13 @@ const lifePhotos = [
   { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照" },
   { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照" },
   { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照" },
+  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河徒步生活照" },
+  { image: "/assets/life-softball.jpg", alt: "运动场生活照" },
+  { image: "/assets/life-changsha.jpg", alt: "长沙旅行生活照" },
 ];
 
 const researchGalleryItems = [
-  { image: "/assets/research-original/research-01.jpg", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439" },
+  { image: "/assets/research-original/research-01.jpg", text: "论文原文 ↗", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439" },
   { image: "/assets/research-original/research-09.jpg" },
   { image: "/assets/research-original/research-02.jpg" },
   { image: "/assets/research-original/research-03.jpg" },
