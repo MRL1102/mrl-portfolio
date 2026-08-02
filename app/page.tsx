@@ -82,8 +82,8 @@ export default function Home() {
                 <article><span>籍贯</span><b>天津市</b></article>
                 <article><span>邮箱</span><b>mrl1102@163.com</b></article>
                 <article><span>教育经历</span><b className="education-value"><em>兰州大学</em><i>环境工程　硕士</i><em>中国矿业大学</em><i>安全工程　本科</i></b></article>
+                <article><span>政治面貌</span><b>中共预备党员</b></article>
               </div>
-              <button className="scroll-more reveal r4" onClick={() => move(1)}>下滑了解更多 <i>↓</i></button>
             </div>
             <div className="hero-profile-card reveal r3"><ProfileCard avatarUrl={asset("profile-headshot.jpg")} /></div>
           </div>
