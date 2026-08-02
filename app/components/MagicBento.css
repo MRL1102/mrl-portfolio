@@ -10,6 +10,8 @@
 .magic-bento-copy h3 { margin:0; font-size:16px; line-height:1.25; font-weight:800; }
 .magic-bento-particle { position:absolute; z-index:4; width:4px; height:4px; border-radius:50%; background:rgb(var(--particle-color)); box-shadow:0 0 10px rgba(var(--particle-color),.9); pointer-events:none; }
 .magic-bento-ripple { position:absolute; z-index:5; border-radius:50%; background:radial-gradient(circle,rgba(var(--particle-color),.45),transparent 65%); pointer-events:none; }
+.magic-bento-card.has-cursor { cursor:none; }
+.magic-bento-cursor { position:absolute; z-index:7; top:50%; left:50%; display:grid; width:68px; height:68px; border:1px solid #b8df72; border-radius:50%; background:rgba(4,26,73,.82); color:#b8df72; place-items:center; pointer-events:none; transform:translate(-50%,-50%) scale(.75); transform-origin:center; opacity:0; font:10px "DM Mono",monospace; letter-spacing:.12em; backdrop-filter:blur(5px); }
 .magic-bento-grid.is-scrollable { display:flex; grid-template-columns:none; grid-auto-rows:auto; width:100%; overflow-x:auto; overscroll-behavior:contain; scroll-snap-type:x mandatory; padding:8px 4px 20px; scrollbar-width:none; }
 .magic-bento-grid.is-scrollable::-webkit-scrollbar { display:none; }
 .magic-bento-grid.is-scrollable .magic-bento-card { flex:0 0 clamp(290px,25vw,430px); height:clamp(360px,58vh,690px); scroll-snap-align:start; }
