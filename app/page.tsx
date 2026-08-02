@@ -21,12 +21,12 @@ const projects = [
 ];
 
 const lifePhotos = [
-  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照" },
-  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照" },
-  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照" },
-  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河徒步生活照" },
-  { image: "/assets/life-softball.jpg", alt: "运动场生活照" },
-  { image: "/assets/life-changsha.jpg", alt: "长沙旅行生活照" },
+  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照", fit: "contain" as const },
+  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照", fit: "contain" as const },
+  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照", fit: "contain" as const },
+  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河徒步生活照", fit: "contain" as const },
+  { image: "/assets/life-softball.jpg", alt: "运动场生活照", fit: "contain" as const },
+  { image: "/assets/life-changsha.jpg", alt: "长沙旅行生活照", fit: "contain" as const },
 ];
 
 const researchGalleryItems = [
@@ -94,7 +94,7 @@ export default function Home() {
 
         <section className={`slide strength-slide ${active === 4 ? "is-active" : ""}`} aria-label="教育与个人优势"><div className="education-backdrop" /><div className="slide-inner strength-inner"><div className="education-head reveal r1"><p className="eyebrow">04 / EDUCATION & STRENGTHS</p><h2>把专业训练，<br />变成持续的<span>能力。</span></h2></div><div className="education-timeline reveal r2"><article><span>2024 — NOW</span><h3>兰州大学</h3><p>环境工程 · 硕士研究生</p></article><article><span>2020 — 2024</span><h3>中国矿业大学</h3><p>安全工程 · 本科<br />A+ 学科 / 全国第一</p></article></div><div className="strengths">{[["01", "研究到落地", "把抽象问题变成可验证、可执行的路径。"], ["02", "AI Native", "以 Prompt、模型评测和 Vibe Coding 重构工作流。"], ["03", "推动发生", "20+ 场校院活动统筹经验，在限制中推进结果。"]].map((item, index) => <article className={`reveal r${index + 3}`} key={item[0]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p><i>↗</i></article>)}</div></div></section>
 
-        <section className={`slide life-slide ${active === 4 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="life-bento-wrap"><MagicBento items={lifePhotos} className="life-bento" showCursor /></div></section>
+        <section className={`slide life-slide ${active === 4 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="life-bento-wrap"><MagicBento items={lifePhotos} className="life-bento" /></div></section>
 
         <section className={`slide contact-slide ${active === 5 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com"><ShinyText text="mrl1102@163.com" speed={1.15} delay={0.3} color="#eef0e9" shineColor="#b8df72" pauseOnHover /></a><div className="contact-data reveal r4"><p>Marell<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p></div></div></section>
       </div>
