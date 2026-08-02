@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import CircularGallery from "./components/CircularGallery";
 import MagicBento from "./components/MagicBento";
 import ProfileCard from "./components/ProfileCard";
+import ShinyText from "./components/ShinyText";
 
 const slides = ["首页", "科研", "实习", "项目", "生活", "联系"];
 const internships = [
@@ -14,18 +15,18 @@ const internships = [
 ];
 
 const projects = [
-  ["01", "Resume Copilot", "VIBE CODING / FULL STACK", "把繁琐网申变成自动化工作流：简历解析、字段匹配、自动填写与人工修正学习。", ["0→1 产品", "Codex", "AI Workflow"]],
-  ["02", "巡河宝", "MULTIMODAL AI / DATA", "以 Ollama 部署 Qwen 多模态模型，完成图像 VQA、结构化输出、异常处理与百万级数据清洗。", ["Qwen", "Ollama", "VQA"]],
+  { period: "2026.03—NOW", title: "Resume Copilot（Vibe Coding）", label: "全栈负责", description: "从重复填写网申信息的痛点出发完成需求拆解、功能规划和原型开发，设计简历解析、字段匹配、自动填写和人工修正学习等功能。使用 Codex 辅助完成开发测试，形成从需求定义、功能实现到迭代优化的 0—1 产品闭环。", alt: "Resume Copilot 项目经历" },
+  { period: "2025.09—12", title: "“巡河宝”数据智能挖掘", label: "主要负责", description: "基于 Ollama 部署 Qwen 多模态模型，设计河流图像 VQA、结构化输出、异常处理与高置信数据筛选流程，服务百万级数据清洗。", alt: "巡河宝数据智能挖掘项目经历" },
 ];
 
 const lifePhotos = [
-  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照", featured: true, fit: "contain" },
-  { image: "/assets/life-changsha.jpg", alt: "长沙生活照", fit: "contain" },
-  { image: "/assets/life-softball.jpg", alt: "校运会垒球掷远生活照", fit: "contain" },
-  { image: "/assets/life-award.jpg", alt: "校运会获奖生活照", fit: "contain" },
-  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照", fit: "contain" },
-  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河生活照", fit: "contain" },
-  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照", featured: true, fit: "contain" },
+  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照" },
+  { image: "/assets/life-changsha.jpg", alt: "长沙生活照" },
+  { image: "/assets/life-softball.jpg", alt: "校运会垒球掷远生活照" },
+  { image: "/assets/life-award.jpg", alt: "校运会获奖生活照" },
+  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照" },
+  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河生活照" },
+  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照" },
 ];
 
 const researchGalleryItems = [
@@ -42,7 +43,6 @@ const researchGalleryItems = [
 
 export default function Home() {
   const [active, setActive] = useState(0);
-  const [selectedProject, setSelectedProject] = useState(0);
   const locked = useRef(false);
   const touchStart = useRef(0);
 
@@ -88,15 +88,15 @@ export default function Home() {
 
         <section className={`slide research-slide ${active === 1 ? "is-active" : ""}`} aria-label="科研成果"><div className="research-backdrop" /><div className="research-circular"><CircularGallery items={researchGalleryItems} bend={2.35} borderRadius={0.018} scrollSpeed={2.3} scrollEase={0.04} /></div></section>
 
-        <section className={`slide experience-slide ${active === 2 ? "is-active" : ""}`} aria-label="实习经历"><div className="workflow-backdrop" /><div className="slide-inner experience-inner"><p className="eyebrow experience-kicker reveal r1">02 / INTERNSHIP EXPERIENCE</p><MagicBento items={internships} className="internship-bento reveal r2" /></div></section>
+        <section className={`slide experience-slide ${active === 2 ? "is-active" : ""}`} aria-label="实习经历"><div className="workflow-backdrop" /><div className="slide-inner experience-inner"><p className="eyebrow experience-kicker reveal r1">03 / INTERNSHIP EXPERIENCE</p><MagicBento items={internships} className="internship-bento reveal r2" /></div></section>
 
-        <section className={`slide project-slide ${active === 3 ? "is-active" : ""}`} aria-label="项目经历"><div className="workflow-backdrop project-bg" /><div className="slide-inner project-inner"><div className="project-list">{projects.map((project, index) => <button type="button" onClick={() => setSelectedProject(index)} className={`project-card reveal r${index + 2} ${selectedProject === index ? "selected" : ""}`} key={project[0]}><span className="project-index">{project[0]}</span><div className="project-orb"><i /><i /><i /></div><div className="project-copy"><p>{project[2]}</p><h3>{project[1]}</h3><span>{project[3]}</span><div className="project-tags">{project[4].map((tag) => <b key={tag}>{tag}</b>)}</div></div><em>查看<br />焦点 ↗</em></button>)}</div></div></section>
+        <section className={`slide project-slide ${active === 3 ? "is-active" : ""}`} aria-label="项目经历"><div className="workflow-backdrop project-bg" /><div className="slide-inner project-inner"><p className="eyebrow project-kicker reveal r1">04 / SELECTED PROJECTS</p><MagicBento items={projects} className="project-bento reveal r2" /></div></section>
 
         <section className={`slide strength-slide ${active === 4 ? "is-active" : ""}`} aria-label="教育与个人优势"><div className="education-backdrop" /><div className="slide-inner strength-inner"><div className="education-head reveal r1"><p className="eyebrow">04 / EDUCATION & STRENGTHS</p><h2>把专业训练，<br />变成持续的<span>能力。</span></h2></div><div className="education-timeline reveal r2"><article><span>2024 — NOW</span><h3>兰州大学</h3><p>环境工程 · 硕士研究生</p></article><article><span>2020 — 2024</span><h3>中国矿业大学</h3><p>安全工程 · 本科<br />A+ 学科 / 全国第一</p></article></div><div className="strengths">{[["01", "研究到落地", "把抽象问题变成可验证、可执行的路径。"], ["02", "AI Native", "以 Prompt、模型评测和 Vibe Coding 重构工作流。"], ["03", "推动发生", "20+ 场校院活动统筹经验，在限制中推进结果。"]].map((item, index) => <article className={`reveal r${index + 3}`} key={item[0]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p><i>↗</i></article>)}</div></div></section>
 
         <section className={`slide life-slide ${active === 4 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="life-bento-wrap"><MagicBento items={lifePhotos} className="life-bento" showCursor /></div></section>
 
-        <section className={`slide contact-slide ${active === 5 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="contact-spark" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">05 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com">mrl1102@163.com <i>↗</i></a><div className="contact-data reveal r4"><p>马瑞良 / MRL<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p><button onClick={() => goTo(0)}>回到首页 ↑</button></div></div></section>
+        <section className={`slide contact-slide ${active === 5 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com"><ShinyText text="mrl1102@163.com" speed={2.3} delay={1.4} color="#eef0e9" shineColor="#b8df72" pauseOnHover /></a><div className="contact-data reveal r4"><p>马瑞良 / MRL<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p></div></div></section>
       </div>
     </main>
   );
