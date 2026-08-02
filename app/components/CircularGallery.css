@@ -1,0 +1,7 @@
+.circular-gallery { position:relative; width:100%; height:100%; overflow:hidden; cursor:grab; touch-action:pan-y; user-select:none; }
+.circular-gallery:active { cursor:grabbing; }
+.circular-gallery:focus-visible { outline:2px solid #b8df72; outline-offset:-8px; }
+.circular-gallery__item { position:absolute; top:50%; left:50%; display:block; overflow:hidden; border:1px solid rgba(255,255,255,.55); background:#fff; box-shadow:0 20px 55px rgba(0,0,0,.32); transform-origin:center; will-change:transform; transition:opacity .18s ease,box-shadow .25s ease; }
+.circular-gallery__item:hover { box-shadow:0 25px 70px rgba(0,0,0,.46),0 0 0 1px rgba(184,223,114,.7); }
+.circular-gallery__item img { display:block; width:100%; height:100%; object-fit:contain; background:#fff; image-rendering:auto; }
+.circular-gallery__link { position:absolute; z-index:2; left:18px; bottom:18px; display:inline-flex; align-items:center; min-height:36px; padding:0 14px; color:#06235a; background:#b8df72; box-shadow:0 10px 30px rgba(0,0,0,.28); font-size:13px; font-weight:900; letter-spacing:.04em; pointer-events:none; }
