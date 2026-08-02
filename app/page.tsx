@@ -8,25 +8,23 @@ import ShinyText from "./components/ShinyText";
 
 const slides = ["首页", "科研", "实习", "项目", "生活", "联系"];
 const internships = [
-  { period: "2026.01—03", title: "北京炫图未来科技有限公司", label: "AI 产品增长运营实习生", description: "参与 AI 修图产品（炫图 AI）冷启动阶段的竞品调研、用户行为与运营数据分析，梳理核心用户场景及竞品差异。", alt: "北京炫图未来科技实习经历" },
-  { period: "2025.10—12", title: "南京元数信息技术有限公司", label: "模型测评实习生", description: "评测大模型生成、视频理解与科研总结等能力，设计模型 Prompt 验证应用表现。", alt: "南京元数信息技术实习经历" },
+  { period: "2026.01—03", title: "北京炫图未来科技有限公司", label: "AI 产品增长运营实习生", description: ["参与 AI 修图产品（炫图 AI）冷启动阶段的竞品调研、用户行为与运营数据分析，梳理核心用户场景及竞品差异。", "制作产品演示视频并运营 TikTok、Instagram、YouTube 等海外账号，支持内容测试、用户触达与增长验证。"], alt: "北京炫图未来科技实习经历" },
+  { period: "2025.10—12", title: "南京元数信息技术有限公司", label: "模型测评实习生", description: ["面向大模型文本生成、视频理解和科研总结等能力设计测试任务，编写并执行评测 Prompt。", "设计对抗性测试案例，识别模型在指令遵循、事实准确性、复杂任务理解与输出稳定性方面的问题。"], alt: "南京元数信息技术实习经历" },
   { period: "2025.06—08", title: "兰州金石资源环境科技有限公司", label: "研究发展管理部实习生", description: "调研甘肃省零碳园区建设现状，开展成本效益分析，梳理绿电直供的适用场景、实施条件与发展约束。", alt: "兰州金石资源环境实习经历" },
   { period: "2025.03—05", title: "甘肃惠科资源环境科技有限公司", label: "工程咨询实习生", description: "参与兰州新区 34 家化工企业现场核查，收集并复核主要生产设备、产品产能、能源消耗及能效指标等数据。完成异常数据校验、设备能效水平评估及问题汇总，协助编制专家核查意见和项目交付材料。", alt: "甘肃惠科资源环境实习经历" },
 ];
 
 const projects = [
-  { period: "2026.03—NOW", title: "Resume Copilot（Vibe Coding）", label: "全栈负责", description: "从重复填写网申信息的痛点出发完成需求拆解、功能规划和原型开发，设计简历解析、字段匹配、自动填写和人工修正学习等功能。使用 Codex 辅助完成开发测试，形成从需求定义、功能实现到迭代优化的 0—1 产品闭环。", alt: "Resume Copilot 项目经历" },
+  { period: "2026.03—NOW", title: "Resume Copilot", label: "全栈负责", description: "从重复填写网申信息的痛点出发完成需求拆解、功能规划和原型开发，设计简历解析、字段匹配、自动填写和人工修正学习等功能。使用 Codex 辅助完成开发测试，形成从需求定义、功能实现到迭代优化的 0—1 产品闭环。", alt: "Resume Copilot 项目经历" },
   { period: "2025.09—12", title: "“巡河宝”数据智能挖掘", label: "主要负责", description: "基于 Ollama 部署 Qwen 多模态模型，设计河流图像 VQA、结构化输出、异常处理与高置信数据筛选流程，服务百万级数据清洗。", alt: "巡河宝数据智能挖掘项目经历" },
 ];
 
 const lifePhotos = [
+  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照" },
   { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照" },
   { image: "/assets/life-changsha.jpg", alt: "长沙生活照" },
-  { image: "/assets/life-softball.jpg", alt: "校运会垒球掷远生活照" },
-  { image: "/assets/life-award.jpg", alt: "校运会获奖生活照" },
   { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照" },
   { image: "/assets/life-binggouhe.jpg", alt: "冰沟河生活照" },
-  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照" },
 ];
 
 const researchGalleryItems = [
@@ -96,7 +94,7 @@ export default function Home() {
 
         <section className={`slide life-slide ${active === 4 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="life-bento-wrap"><MagicBento items={lifePhotos} className="life-bento" showCursor /></div></section>
 
-        <section className={`slide contact-slide ${active === 5 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com"><ShinyText text="mrl1102@163.com" speed={2.3} delay={1.4} color="#eef0e9" shineColor="#b8df72" pauseOnHover /></a><div className="contact-data reveal r4"><p>马瑞良 / MRL<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p></div></div></section>
+        <section className={`slide contact-slide ${active === 5 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com"><ShinyText text="mrl1102@163.com" speed={2.3} delay={1.4} color="#eef0e9" shineColor="#b8df72" pauseOnHover /></a><div className="contact-data reveal r4"><p>Marell<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p></div></div></section>
       </div>
     </main>
   );

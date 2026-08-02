@@ -10,7 +10,7 @@ export type MagicBentoItem = {
   title?: string;
   label?: string;
   period?: string;
-  description?: string;
+  description?: string | string[];
   href?: string;
   featured?: boolean;
   fit?: "cover" | "contain";
@@ -81,7 +81,7 @@ function MagicBentoCard({ item, glowColor, showCursor }: { item: MagicBentoItem;
     card.appendChild(ripple);
     gsap.fromTo(ripple, { opacity: 0.85, scale: 0 }, { opacity: 0, scale: 1, duration: 0.72, ease: "power2.out", onComplete: () => ripple.remove() });
   };
-  const content = item.image ? <>{item.fit === "contain" && <span className="magic-bento-photo-backdrop" style={{ backgroundImage: `url("${item.image}")` }} />}<img src={item.image} alt={item.alt} loading="eager" decoding="sync" /><span className="magic-bento-shade" />{showCursor && <span ref={cursorRef} className="magic-bento-cursor">VIEW</span>}{(item.label || item.title) && <div className="magic-bento-copy">{item.label && <small>{item.label}</small>}{item.title && <h3>{item.title}</h3>}</div>}</> : <div className="magic-bento-work-copy"><span className="magic-bento-period">{item.period}</span><i>+</i><h3>{item.title}</h3><b>{item.label}</b><p>{item.description}</p></div>;
+  const content = item.image ? <>{item.fit === "contain" && <span className="magic-bento-photo-backdrop" style={{ backgroundImage: `url("${item.image}")` }} />}<img src={item.image} alt={item.alt} loading="eager" decoding="sync" /><span className="magic-bento-shade" />{showCursor && <span ref={cursorRef} className="magic-bento-cursor">VIEW</span>}{(item.label || item.title) && <div className="magic-bento-copy">{item.label && <small>{item.label}</small>}{item.title && <h3>{item.title}</h3>}</div>}</> : <div className="magic-bento-work-copy"><span className="magic-bento-period">{item.period}</span><i>+</i><h3>{item.title}</h3><b>{item.label}</b>{Array.isArray(item.description) ? <ul>{item.description.map((line) => <li key={line}>{line}</li>)}</ul> : <p>{item.description}</p>}</div>;
   const className = `magic-bento-card${item.featured ? " is-featured" : ""}${item.fit === "contain" ? " is-contain" : ""}${!item.image ? " is-text-card" : ""}${showCursor ? " has-cursor" : ""}`;
   const style = { "--magic-glow": glowColor } as CSSProperties;
   if (item.href) return <a ref={cardRef as unknown as RefObject<HTMLAnchorElement>} className={className} style={style} href={item.href} target="_blank" rel="noreferrer" onMouseEnter={onEnter} onMouseMove={onMove} onMouseLeave={onLeave} onClick={onClick}>{content}</a>;
