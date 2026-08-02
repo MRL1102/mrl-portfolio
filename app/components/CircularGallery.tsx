@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
 import "./CircularGallery.css";
 
-type GalleryItem = { image: string; text?: string };
+type GalleryItem = { image: string; text?: string; href?: string };
 
 type CircularGalleryProps = {
   items: GalleryItem[];
@@ -38,6 +38,7 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
     let totalWidth = 1;
     let raf = 0;
     let dragging = false;
+    let dragged = false;
     let startX = 0;
     let startScroll = 0;
 
@@ -52,7 +53,7 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
       image.onload = () => { texture.image = image; program.uniforms.uImageSizes.value = [image.naturalWidth, image.naturalHeight]; };
       const plane = new Mesh(gl, { geometry, program });
       plane.setParent(scene);
-      return { plane, program, index };
+      return { plane, program, index, item };
     });
 
     const resize = () => {
@@ -90,9 +91,9 @@ export default function CircularGallery({ items, bend = 3, borderRadius = 0.05, 
       raf = window.requestAnimationFrame(render);
     };
     const onWheel = (event: WheelEvent) => { event.preventDefault(); event.stopPropagation(); scroll.target += Math.sign(event.deltaY) * scrollSpeed * 2.5; };
-    const onPointerDown = (event: PointerEvent) => { dragging = true; startX = event.clientX; startScroll = scroll.target; container.setPointerCapture(event.pointerId); };
-    const onPointerMove = (event: PointerEvent) => { if (dragging) scroll.target = startScroll + (startX - event.clientX) * scrollSpeed * 0.025; };
-    const onPointerUp = (event: PointerEvent) => { dragging = false; container.releasePointerCapture?.(event.pointerId); };
+    const onPointerDown = (event: PointerEvent) => { dragging = true; dragged = false; startX = event.clientX; startScroll = scroll.target; container.setPointerCapture(event.pointerId); };
+    const onPointerMove = (event: PointerEvent) => { if (dragging) { if (Math.abs(startX - event.clientX) > 6) dragged = true; scroll.target = startScroll + (startX - event.clientX) * scrollSpeed * 0.025; } };
+    const onPointerUp = (event: PointerEvent) => { dragging = false; container.releasePointerCapture?.(event.pointerId); if (!dragged) { const focused = medias.reduce((nearest, media) => Math.abs(media.plane.position.x) < Math.abs(nearest.plane.position.x) ? media : nearest, medias[0]); if (focused.item.href) window.open(focused.item.href, "_blank", "noopener,noreferrer"); } };
     const onKeyDown = (event: KeyboardEvent) => { if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); event.stopPropagation(); scroll.target += event.key === "ArrowRight" ? scrollSpeed * 5 : -scrollSpeed * 5; } };
     resize(); render();
     window.addEventListener("resize", resize);

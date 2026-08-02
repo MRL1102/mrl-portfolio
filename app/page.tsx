@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import CircularGallery from "./components/CircularGallery";
 import MagicBento from "./components/MagicBento";
 
 const slides = ["首页", "科研", "实习", "项目", "教育与优势", "生活", "联系"];
@@ -33,16 +34,16 @@ const lifePhotos = [
   { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照", featured: true, fit: "contain" },
 ];
 
-const researchItems = [
-  { image: "/assets/research-pages/research-01.png", alt: "SCI论文首页", label: "SCI / FIRST AUTHOR", title: "Indoor pollutant dispersion pathways", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439", featured: true },
-  { image: "/assets/research-pages/research-02.png", alt: "发明专利受理通知书", label: "INVENTION PATENT", title: "大气化学反应计算替代模型" },
-  { image: "/assets/research-pages/research-09.png", alt: "发明专利授权证书", label: "AUTHORIZED PATENT", title: "大气化学反应计算替代模型" },
-  { image: "/assets/research-pages/research-03.png", alt: "软件著作权证书：分布式住宅室内空气质量感知网络云平台", label: "SOFTWARE COPYRIGHT 01", title: "分布式住宅室内空气质量感知网络云平台 V1.0" },
-  { image: "/assets/research-pages/research-04.png", alt: "软件著作权证书：建筑室内空气净化效能评估与优化平台", label: "SOFTWARE COPYRIGHT 02", title: "建筑室内空气净化效能评估与优化平台 V1.0" },
-  { image: "/assets/research-pages/research-05.png", alt: "软件著作权证书：室内环境质量智能监测与分析系统", label: "SOFTWARE COPYRIGHT 03", title: "室内环境质量智能监测与分析系统 V1.0" },
-  { image: "/assets/research-pages/research-06.png", alt: "软件著作权证书：室内空气污染物时空演化模拟与源头逆向解析系统", label: "SOFTWARE COPYRIGHT 04", title: "室内空气污染物时空演化模拟与源头逆向解析系统 V1.0" },
-  { image: "/assets/research-pages/research-07.png", alt: "软件著作权证书：室内空气污染源动态解析与扩散模拟分析系统", label: "SOFTWARE COPYRIGHT 05", title: "室内空气污染源动态解析与扩散模拟分析系统 V1.0" },
-  { image: "/assets/research-pages/research-08.png", alt: "软件著作权证书：室内人居环境暴露评估服务平台", label: "SOFTWARE COPYRIGHT 06", title: "室内人居环境暴露评估服务平台 V1.0" },
+const researchGalleryItems = [
+  { image: "/assets/research-pages/research-01.png", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439" },
+  { image: "/assets/research-pages/research-02.png" },
+  { image: "/assets/research-pages/research-09.png" },
+  { image: "/assets/research-pages/research-03.png" },
+  { image: "/assets/research-pages/research-04.png" },
+  { image: "/assets/research-pages/research-05.png" },
+  { image: "/assets/research-pages/research-06.png" },
+  { image: "/assets/research-pages/research-07.png" },
+  { image: "/assets/research-pages/research-08.png" },
 ];
 
 export default function Home() {
@@ -81,7 +82,7 @@ export default function Home() {
           <div className="slide-inner hero-inner"><p className="quote-label reveal r1">A THOUGHT FOR TODAY / 2026</p><h1 className="quote-text reveal r2">{quote.text.split("\n").map((line) => <span key={line}>{line}</span>)}</h1><p className="quote-author reveal r3">— {quote.author}</p><button className="scroll-more reveal r4" onClick={() => move(1)}>下滑了解更多 <i>↓</i></button></div>
         </section>
 
-        <section className={`slide research-slide ${active === 1 ? "is-active" : ""}`} aria-label="科研成果"><div className="research-backdrop" /><div className="slide-inner research-bento-inner"><div className="research-heading reveal r1"><p className="eyebrow">01 / RESEARCH OUTPUT</p><h2>科研成果，<br />逐张<span>展开。</span></h2></div><div className="research-bento-wrap reveal r2"><MagicBento items={researchItems} className="research-bento" scrollable /></div></div></section>
+        <section className={`slide research-slide ${active === 1 ? "is-active" : ""}`} aria-label="科研成果"><div className="research-backdrop" /><div className="research-circular"><CircularGallery items={researchGalleryItems} bend={2.35} borderRadius={0.018} scrollSpeed={2.3} scrollEase={0.04} /></div></section>
 
         <section className={`slide experience-slide ${active === 2 ? "is-active" : ""}`} aria-label="实习经历"><div className="workflow-backdrop" /><div className="slide-inner"><div className="experience-head"><div><p className="eyebrow reveal r1">02 / FIELD NOTES</p><h2 className="reveal r2">不只记录，<br />更进入<span>现场。</span></h2></div><p className="reveal r3">从产业现场到 AI 产品，<br />每一段实践都在校准我解决问题的方式。</p></div><div className="experience-grid">{internships.map((item, index) => <article className={`experience-card reveal r${index + 2}`} key={item[1]}><span>{item[0]}</span><div className="card-plus">+</div><h3>{item[1]}</h3><b>{item[2]}</b><p>{item[3]}</p></article>)}</div></div></section>
 
