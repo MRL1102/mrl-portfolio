@@ -6,6 +6,9 @@ import MagicBento from "./components/MagicBento";
 import ProfileCard from "./components/ProfileCard";
 import ShinyText from "./components/ShinyText";
 
+const assetBase = (import.meta as ImportMeta & { env?: { BASE_URL?: string } }).env?.BASE_URL ?? "/";
+const asset = (path: string) => `${assetBase}assets/${path}`;
+
 const slides = ["首页", "科研", "实习", "项目", "生活", "联系"];
 const internships = [
   { period: "2026.01—03", title: "北京炫图未来科技有限公司", label: "AI 产品增长运营实习生", description: ["参与 AI 修图产品（炫图 AI）冷启动阶段的竞品调研、用户行为与运营数据分析，梳理核心用户场景及竞品差异。", "制作产品演示视频并运营 TikTok、Instagram、YouTube 等海外账号，支持内容测试、用户触达与增长验证。"], alt: "北京炫图未来科技实习经历" },
@@ -21,24 +24,24 @@ const projects = [
 ];
 
 const lifePhotos = [
-  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照", fit: "contain" as const },
-  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照", fit: "contain" as const },
-  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照", fit: "contain" as const },
-  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河徒步生活照", fit: "contain" as const },
-  { image: "/assets/life-softball.jpg", alt: "运动场生活照", fit: "contain" as const },
-  { image: "/assets/life-changsha.jpg", alt: "长沙旅行生活照", fit: "contain" as const },
+  { image: asset("life-gangshika.jpg"), alt: "岗什卡大本营生活照", fit: "contain" as const },
+  { image: asset("life-wushaoling.jpg"), alt: "乌鞘岭生活照", fit: "contain" as const },
+  { image: asset("life-basketball.jpg"), alt: "篮球赛生活照", fit: "contain" as const },
+  { image: asset("life-binggouhe.jpg"), alt: "冰沟河徒步生活照", fit: "contain" as const },
+  { image: asset("life-softball.jpg"), alt: "运动场生活照", fit: "contain" as const },
+  { image: asset("life-changsha.jpg"), alt: "长沙旅行生活照", fit: "contain" as const },
 ];
 
 const researchGalleryItems = [
-  { image: "/assets/research-original/research-01.jpg", text: "论文原文 ↗", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439" },
-  { image: "/assets/research-original/research-09.jpg" },
-  { image: "/assets/research-original/research-02.jpg" },
-  { image: "/assets/research-original/research-03.jpg" },
-  { image: "/assets/research-original/research-04.jpg" },
-  { image: "/assets/research-original/research-05.jpg" },
-  { image: "/assets/research-original/research-06.jpg" },
-  { image: "/assets/research-original/research-07.jpg" },
-  { image: "/assets/research-original/research-08.jpg" },
+  { image: asset("research-original/research-01.jpg"), text: "论文原文 ↗", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439" },
+  { image: asset("research-original/research-09.jpg") },
+  { image: asset("research-original/research-02.jpg") },
+  { image: asset("research-original/research-03.jpg") },
+  { image: asset("research-original/research-04.jpg") },
+  { image: asset("research-original/research-05.jpg") },
+  { image: asset("research-original/research-06.jpg") },
+  { image: asset("research-original/research-07.jpg") },
+  { image: asset("research-original/research-08.jpg") },
 ];
 
 export default function Home() {
@@ -82,7 +85,7 @@ export default function Home() {
               </div>
               <button className="scroll-more reveal r4" onClick={() => move(1)}>下滑了解更多 <i>↓</i></button>
             </div>
-            <div className="hero-profile-card reveal r3"><ProfileCard avatarUrl="/assets/profile-headshot.jpg" /></div>
+            <div className="hero-profile-card reveal r3"><ProfileCard avatarUrl={asset("profile-headshot.jpg")} /></div>
           </div>
         </section>
 
