@@ -28,8 +28,8 @@ const lifePhotos = [
 
 const researchGalleryItems = [
   { image: "/assets/research-original/research-01.jpg", href: "https://www.sciencedirect.com/science/article/pii/S0360132325016439" },
-  { image: "/assets/research-original/research-02.jpg" },
   { image: "/assets/research-original/research-09.jpg" },
+  { image: "/assets/research-original/research-02.jpg" },
   { image: "/assets/research-original/research-03.jpg" },
   { image: "/assets/research-original/research-04.jpg" },
   { image: "/assets/research-original/research-05.jpg" },
