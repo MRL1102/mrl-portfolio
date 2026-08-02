@@ -15,8 +15,9 @@ const internships = [
 ];
 
 const projects = [
-  { period: "2026.03—NOW", title: "Resume Copilot", label: "全栈负责", description: "从重复填写网申信息的痛点出发完成需求拆解、功能规划和原型开发，设计简历解析、字段匹配、自动填写和人工修正学习等功能。使用 Codex 辅助完成开发测试，形成从需求定义、功能实现到迭代优化的 0—1 产品闭环。", alt: "Resume Copilot 项目经历" },
+  { period: "2026.03—NOW", title: "Resume Copilot", label: "全栈负责", description: ["从重复填写网申信息的痛点出发，完成需求拆解、功能规划和原型开发，设计简历解析、字段匹配、自动填写和人工修正学习等功能。", "使用 Codex 辅助完成开发测试，形成从需求定义、功能实现到迭代优化的 0—1 产品闭环。"], descriptionStyle: "paragraphs" as const, alt: "Resume Copilot 项目经历" },
   { period: "2025.09—12", title: "“巡河宝”数据智能挖掘", label: "主要负责", description: "基于 Ollama 部署 Qwen 多模态模型，设计河流图像 VQA、结构化输出、异常处理与高置信数据筛选流程，服务百万级数据清洗。", alt: "巡河宝数据智能挖掘项目经历" },
+  { period: "2024.09—12", title: "多传感器融合的室内巡航感知智能机器人", label: "主要负责", description: "搭建基于 ROS2 的全向机器人，融合 SLAM、VLM 视觉与 DeepSeek 大模型，实现室内自动巡航与污染物溯源解析。", alt: "多传感器融合的室内巡航感知智能机器人项目经历" },
 ];
 
 const lifePhotos = [
@@ -94,7 +95,7 @@ export default function Home() {
 
         <section className={`slide life-slide ${active === 4 ? "is-active" : ""}`} aria-label="生活与兴趣"><div className="life-wash" /><div className="life-bento-wrap"><MagicBento items={lifePhotos} className="life-bento" showCursor /></div></section>
 
-        <section className={`slide contact-slide ${active === 5 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com"><ShinyText text="mrl1102@163.com" speed={2.3} delay={1.4} color="#eef0e9" shineColor="#b8df72" pauseOnHover /></a><div className="contact-data reveal r4"><p>Marell<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p></div></div></section>
+        <section className={`slide contact-slide ${active === 5 ? "is-active" : ""}`} aria-label="联系方式"><div className="education-backdrop contact-bg" /><div className="slide-inner contact-inner"><p className="eyebrow reveal r1">06 / LET&apos;S MAKE THINGS HAPPEN</p><h2 className="reveal r2">下一个好问题，<br />从一封<span>邮件</span>开始。</h2><a className="email-link reveal r3" href="mailto:mrl1102@163.com"><ShinyText text="mrl1102@163.com" speed={1.15} delay={0.3} color="#eef0e9" shineColor="#b8df72" pauseOnHover /></a><div className="contact-data reveal r4"><p>Marell<br />LANZHOU UNIVERSITY</p><p>156 2042 0698<br />TIANJIN, CHINA</p></div></div></section>
       </div>
     </main>
   );
