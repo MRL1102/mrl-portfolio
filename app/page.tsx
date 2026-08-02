@@ -7,10 +7,10 @@ import ProfileCard from "./components/ProfileCard";
 
 const slides = ["首页", "科研", "实习", "项目", "生活", "联系"];
 const internships = [
-  ["2026.01—03", "北京炫图未来科技", "AI 产品增长运营", "冷启动竞品、用户行为和运营数据分析"],
-  ["2025.10—12", "南京元数信息技术", "模型测评", "大模型生成、视频理解与 Prompt 验证"],
-  ["2025.06—08", "兰州金石资源环境", "研究发展管理", "零碳园区与绿电直供的成本效益研究"],
-  ["2025.03—05", "甘肃惠科资源环境", "工程咨询", "34 家化工企业现场核查与能效评估"],
+  { period: "2026.01—03", title: "北京炫图未来科技有限公司", label: "AI 产品增长运营实习生", description: "参与 AI 修图产品（炫图 AI）冷启动阶段的竞品调研、用户行为与运营数据分析，梳理核心用户场景及竞品差异。", alt: "北京炫图未来科技实习经历" },
+  { period: "2025.10—12", title: "南京元数信息技术有限公司", label: "模型测评实习生", description: "评测大模型生成、视频理解与科研总结等能力，设计模型 Prompt 验证应用表现。", alt: "南京元数信息技术实习经历" },
+  { period: "2025.06—08", title: "兰州金石资源环境科技有限公司", label: "研究发展管理部实习生", description: "调研甘肃省零碳园区建设现状，开展成本效益分析，梳理绿电直供的适用场景、实施条件与发展约束。", alt: "兰州金石资源环境实习经历" },
+  { period: "2025.03—05", title: "甘肃惠科资源环境科技有限公司", label: "工程咨询实习生", description: "参与兰州新区 34 家化工企业现场核查，收集并复核主要生产设备、产品产能、能源消耗及能效指标等数据。完成异常数据校验、设备能效水平评估及问题汇总，协助编制专家核查意见和项目交付材料。", alt: "甘肃惠科资源环境实习经历" },
 ];
 
 const projects = [
@@ -88,9 +88,9 @@ export default function Home() {
 
         <section className={`slide research-slide ${active === 1 ? "is-active" : ""}`} aria-label="科研成果"><div className="research-backdrop" /><div className="research-circular"><CircularGallery items={researchGalleryItems} bend={2.35} borderRadius={0.018} scrollSpeed={2.3} scrollEase={0.04} /></div></section>
 
-        <section className={`slide experience-slide ${active === 2 ? "is-active" : ""}`} aria-label="实习经历"><div className="workflow-backdrop" /><div className="slide-inner"><div className="experience-head"><div><p className="eyebrow reveal r1">02 / FIELD NOTES</p><h2 className="reveal r2">不只记录，<br />更进入<span>现场。</span></h2></div><p className="reveal r3">从产业现场到 AI 产品，<br />每一段实践都在校准我解决问题的方式。</p></div><div className="experience-grid">{internships.map((item, index) => <article className={`experience-card reveal r${index + 2}`} key={item[1]}><span>{item[0]}</span><div className="card-plus">+</div><h3>{item[1]}</h3><b>{item[2]}</b><p>{item[3]}</p></article>)}</div></div></section>
+        <section className={`slide experience-slide ${active === 2 ? "is-active" : ""}`} aria-label="实习经历"><div className="workflow-backdrop" /><div className="slide-inner experience-inner"><p className="eyebrow experience-kicker reveal r1">02 / INTERNSHIP EXPERIENCE</p><MagicBento items={internships} className="internship-bento reveal r2" /></div></section>
 
-        <section className={`slide project-slide ${active === 3 ? "is-active" : ""}`} aria-label="项目经历"><div className="workflow-backdrop project-bg" /><div className="slide-inner"><div className="project-head"><p className="eyebrow reveal r1">03 / SELECTED WORK</p><h2 className="reveal r2">把想法做成<br /><span>可用的东西。</span></h2><p className="reveal r3">点击卡片，查看项目关键词。</p></div><div className="project-list">{projects.map((project, index) => <button type="button" onClick={() => setSelectedProject(index)} className={`project-card reveal r${index + 2} ${selectedProject === index ? "selected" : ""}`} key={project[0]}><span className="project-index">{project[0]}</span><div className="project-orb"><i /><i /><i /></div><div className="project-copy"><p>{project[2]}</p><h3>{project[1]}</h3><span>{project[3]}</span><div className="project-tags">{project[4].map((tag) => <b key={tag}>{tag}</b>)}</div></div><em>查看<br />焦点 ↗</em></button>)}</div></div></section>
+        <section className={`slide project-slide ${active === 3 ? "is-active" : ""}`} aria-label="项目经历"><div className="workflow-backdrop project-bg" /><div className="slide-inner project-inner"><div className="project-list">{projects.map((project, index) => <button type="button" onClick={() => setSelectedProject(index)} className={`project-card reveal r${index + 2} ${selectedProject === index ? "selected" : ""}`} key={project[0]}><span className="project-index">{project[0]}</span><div className="project-orb"><i /><i /><i /></div><div className="project-copy"><p>{project[2]}</p><h3>{project[1]}</h3><span>{project[3]}</span><div className="project-tags">{project[4].map((tag) => <b key={tag}>{tag}</b>)}</div></div><em>查看<br />焦点 ↗</em></button>)}</div></div></section>
 
         <section className={`slide strength-slide ${active === 4 ? "is-active" : ""}`} aria-label="教育与个人优势"><div className="education-backdrop" /><div className="slide-inner strength-inner"><div className="education-head reveal r1"><p className="eyebrow">04 / EDUCATION & STRENGTHS</p><h2>把专业训练，<br />变成持续的<span>能力。</span></h2></div><div className="education-timeline reveal r2"><article><span>2024 — NOW</span><h3>兰州大学</h3><p>环境工程 · 硕士研究生</p></article><article><span>2020 — 2024</span><h3>中国矿业大学</h3><p>安全工程 · 本科<br />A+ 学科 / 全国第一</p></article></div><div className="strengths">{[["01", "研究到落地", "把抽象问题变成可验证、可执行的路径。"], ["02", "AI Native", "以 Prompt、模型评测和 Vibe Coding 重构工作流。"], ["03", "推动发生", "20+ 场校院活动统筹经验，在限制中推进结果。"]].map((item, index) => <article className={`reveal r${index + 3}`} key={item[0]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p><i>↗</i></article>)}</div></div></section>
 
