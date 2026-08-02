@@ -24,13 +24,13 @@ const projects = [
 ];
 
 const lifePhotos = [
-  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照", featured: true },
-  { image: "/assets/life-changsha.jpg", alt: "长沙生活照" },
-  { image: "/assets/life-softball.jpg", alt: "校运会垒球掷远生活照" },
-  { image: "/assets/life-award.jpg", alt: "校运会获奖生活照" },
-  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照" },
-  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河生活照" },
-  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照", featured: true },
+  { image: "/assets/life-basketball.jpg", alt: "篮球赛生活照", featured: true, fit: "contain" },
+  { image: "/assets/life-changsha.jpg", alt: "长沙生活照", fit: "contain" },
+  { image: "/assets/life-softball.jpg", alt: "校运会垒球掷远生活照", fit: "contain" },
+  { image: "/assets/life-award.jpg", alt: "校运会获奖生活照", fit: "contain" },
+  { image: "/assets/life-wushaoling.jpg", alt: "乌鞘岭生活照", fit: "contain" },
+  { image: "/assets/life-binggouhe.jpg", alt: "冰沟河生活照", fit: "contain" },
+  { image: "/assets/life-gangshika.jpg", alt: "岗什卡大本营生活照", featured: true, fit: "contain" },
 ];
 
 const researchItems = [

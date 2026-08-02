@@ -11,6 +11,7 @@ export type MagicBentoItem = {
   label?: string;
   href?: string;
   featured?: boolean;
+  fit?: "cover" | "contain";
 };
 
 type MagicBentoProps = {
@@ -78,8 +79,8 @@ function MagicBentoCard({ item, glowColor, showCursor }: { item: MagicBentoItem;
     card.appendChild(ripple);
     gsap.fromTo(ripple, { opacity: 0.85, scale: 0 }, { opacity: 0, scale: 1, duration: 0.72, ease: "power2.out", onComplete: () => ripple.remove() });
   };
-  const content = <><img src={item.image} alt={item.alt} loading="eager" decoding="sync" /><span className="magic-bento-shade" />{showCursor && <span ref={cursorRef} className="magic-bento-cursor">VIEW</span>}{(item.label || item.title) && <div className="magic-bento-copy">{item.label && <small>{item.label}</small>}{item.title && <h3>{item.title}</h3>}</div>}</>;
-  const className = `magic-bento-card${item.featured ? " is-featured" : ""}${showCursor ? " has-cursor" : ""}`;
+  const content = <>{item.fit === "contain" && <span className="magic-bento-photo-backdrop" style={{ backgroundImage: `url("${item.image}")` }} />}<img src={item.image} alt={item.alt} loading="eager" decoding="sync" /><span className="magic-bento-shade" />{showCursor && <span ref={cursorRef} className="magic-bento-cursor">VIEW</span>}{(item.label || item.title) && <div className="magic-bento-copy">{item.label && <small>{item.label}</small>}{item.title && <h3>{item.title}</h3>}</div>}</>;
+  const className = `magic-bento-card${item.featured ? " is-featured" : ""}${item.fit === "contain" ? " is-contain" : ""}${showCursor ? " has-cursor" : ""}`;
   const style = { "--magic-glow": glowColor } as CSSProperties;
   if (item.href) return <a ref={cardRef as unknown as RefObject<HTMLAnchorElement>} className={className} style={style} href={item.href} target="_blank" rel="noreferrer" onMouseEnter={onEnter} onMouseMove={onMove} onMouseLeave={onLeave} onClick={onClick}>{content}</a>;
   return <article ref={cardRef} className={className} style={style} onMouseEnter={onEnter} onMouseMove={onMove} onMouseLeave={onLeave} onClick={onClick}>{content}</article>;
